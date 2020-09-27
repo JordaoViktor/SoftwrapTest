@@ -2,6 +2,10 @@ import React from 'react';
 import Jumbotron from 'react-bootstrap/Jumbotron' 
 import Container from 'react-bootstrap/Container' 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { SplitScreen } from './styled'
+
+import Contact from '../../components/Contact'
+import ContactForm from '../../components/ContactForm'
 
 function Home() {
   return (
@@ -14,6 +18,18 @@ function Home() {
           </p>
         </Container>    
       </Jumbotron>
+      <SplitScreen>
+        <Container>
+          <ContactForm>
+            
+          </ContactForm>
+        </Container>
+        <Container>
+          <Contact>
+          
+          </Contact>
+        </Container>
+      </SplitScreen>
     </>
   );
 }
