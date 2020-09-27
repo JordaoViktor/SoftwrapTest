@@ -6,10 +6,17 @@ import { SplitScreen } from './styled'
 
 import Contact from '../../components/Contact'
 import ContactForm from '../../components/ContactForm'
+import firebaseDb from '../../firebase'
 
 function Home() {
   const addOrEdit = object => {
-        
+      firebaseDb.child('contacts').push(
+        object,
+        err => {
+          if(err)
+          console.log(err)
+        }
+      )
   }
   return (
     <>

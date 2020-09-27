@@ -33,7 +33,7 @@ function ContactForm (props) {
 
     const handleFormSubmit = e => {
         e.preventDefault();
-        props.addOrEdith(name, age, maritalStatus, cpf, city, state)
+        props.addOrEdit({name, age, maritalStatus, cpf, city, state})
     }
 
     return(
