@@ -8,6 +8,9 @@ import Contact from '../../components/Contact'
 import ContactForm from '../../components/ContactForm'
 
 function Home() {
+  const addOrEdit = object => {
+        
+  }
   return (
     <>
       <Jumbotron fluid >
@@ -20,12 +23,10 @@ function Home() {
       </Jumbotron>
       <SplitScreen>
         <Container>
-          <ContactForm>
-            
-          </ContactForm>
+          <ContactForm addOrEdit={addOrEdit}/>
         </Container>
         <Container>
-          <Contact>
+          <Contact >
           
           </Contact>
         </Container>
