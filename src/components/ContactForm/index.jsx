@@ -14,14 +14,15 @@ function ContactForm (props) {
         state:'',
     };
     let [ values, setValues ] = useState(initialValues)
+
     useEffect(()=> { 
-        console.log(props.currentId)
-        console.log(props.contactObjects)
-        if (props.currentId ==''){
+
+        if (props.currentId ==='') {
             setValues({
                 ...initialValues
             })
         }
+
         else {
             setValues({
                 ...props.contactObjects[props.currentId]
@@ -35,7 +36,6 @@ function ContactForm (props) {
            ...values,
            [name]: value
        })
-       console.log(name, value)
     }
 
    
@@ -53,7 +53,7 @@ function ContactForm (props) {
         e.preventDefault();
         props.addOrEdit(values)
     }
-
+console.log(props.currentId)
     return(
         <Formik initialValues={initialValues} validationSchema={validations}>
             <FormikForm onSubmit={handleFormSubmit}>
@@ -75,8 +75,8 @@ function ContactForm (props) {
 
                     <h3>Digite seu Estado</h3>
                     <Field type="text" name="state" value={values.state} onInput={handleInputChange} placeholder="Estado" className="mb-2"/> 
-                    <Button type="submit" variant="primary">Enviar</Button>
-                </Container>
+                    <Button type="submit" variant="primary">{props.currentId === '' ? "Salvar" : "Atualizar"}</Button>
+                </Container> 
             </FormikForm>
         </Formik>
     )

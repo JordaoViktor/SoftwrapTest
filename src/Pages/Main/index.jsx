@@ -20,7 +20,7 @@ function Home() {
       )
   }
 
-const {contactObjects, currentId } = useContext(FirebaseContext)
+const {contactObjects, currentId, setContactObjects, setCurrentId } = useContext(FirebaseContext)
 
   return (
     <>
@@ -38,7 +38,7 @@ const {contactObjects, currentId } = useContext(FirebaseContext)
           <ContactForm {...({addOrEdit, currentId, contactObjects})}/>
         </Container>
         <Container>
-          <Contact />
+          <Contact  {...({currentId, contactObjects, setContactObjects, setCurrentId})}/>
         </Container>
       </SplitScreen>
     </>

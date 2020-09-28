@@ -1,14 +1,11 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { } from 'styled-components';
 import Table from 'react-bootstrap/Table';
 import firebaseDb from '../../firebase';
 import { BsPencil, BsTrash } from 'react-icons/bs';
 
 
-function Contact() {
-    const [ contactObjects, setContactObjects] = useState({});
-    const [ currentId, setCurrentId] = useState('');
-
+function Contact({contactObjects, setContactObjects, currentId, setCurrentId}) {
     useEffect(()=>{
         firebaseDb.child('contacts').on('value', snapshot => {
             if (snapshot.val() != null)
@@ -17,8 +14,6 @@ function Contact() {
             })
         })
     },[])
-
-    
 
     return (
         <div className="mr-1">
