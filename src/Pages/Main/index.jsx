@@ -11,14 +11,32 @@ import { FirebaseContext } from '../../App'
 
 function Home() {
   const addOrEdit = object => {
+    if (currentId ==''){
       firebaseDb.child('contacts').push(
         object,
         err => {
-          if(err)
-          console.log(err)
-        }
+          if(err){
+            console.log(err)
+          }else {
+            setCurrentId('')
+          }
+        } 
       )
-  }
+    } else{
+        firebaseDb.child(`contacts/${currentId}`).set(
+          object,
+          err => {
+            if(err){
+              console.log(err)
+            } else {
+              setCurrentId('')
+            }
+          
+          }
+        )
+      }
+    }
+  
 
 const {contactObjects, currentId, setContactObjects, setCurrentId } = useContext(FirebaseContext)
 

@@ -52,6 +52,7 @@ function ContactForm (props) {
     const handleFormSubmit = e => {
         e.preventDefault();
         props.addOrEdit(values)
+        
     }
 console.log(props.currentId)
     return(
