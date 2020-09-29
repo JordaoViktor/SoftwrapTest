@@ -54,7 +54,6 @@ function ContactForm (props) {
         props.addOrEdit(values)
         
     }
-console.log(props.currentId)
     return(
         <Formik initialValues={initialValues} validationSchema={validations}>
             <FormikForm onSubmit={handleFormSubmit}>

@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
-import { } from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import firebaseDb from '../../firebase';
 import { BsPencil, BsTrash } from 'react-icons/bs';
-
+import Pagination from 'react-bootstrap/Pagination'
 
 function Contact({contactObjects, setContactObjects, currentId, setCurrentId, onDelete}) {
     useEffect(()=>{
@@ -18,7 +17,29 @@ function Contact({contactObjects, setContactObjects, currentId, setCurrentId, on
         })
     },[])
 
+    useEffect(
+        ()=> {
+            
+        },[]
+    )
+        
+
+    const [ currentPage, setCurrentPage ] = useState(1);
+    const [ postPerPage, setPostPerPage ] = useState(5);
+
+   const indexOfLastPost = currentPage * postPerPage;
+   const indexOfFirstPost = indexOfLastPost - postPerPage;
+
+   const currentPosts = Object.keys(contactObjects).slice(indexOfFirstPost,indexOfLastPost);
+    
+   const pageNumbers = []
    
+   for(let i = 1; i<= Math.ceil(Object.keys(contactObjects).length/ postPerPage);i++){
+       pageNumbers.push(i)
+    }
+    
+    const paginate = (pageNumbers) => {setCurrentPage(pageNumbers)}
+   console.log(currentPosts)
     return (
         <div className="mr-1">
             <Table striped bordered hover size="sm">
@@ -34,7 +55,7 @@ function Contact({contactObjects, setContactObjects, currentId, setCurrentId, on
                 </tr>
             </thead>
             <tbody>
-                {Object.keys(contactObjects).map(id=>{
+                {currentPosts.map(id=>{
                     return( 
                         <tr key={id}>
                             <td>{contactObjects[id].name}</td>
@@ -54,8 +75,22 @@ function Contact({contactObjects, setContactObjects, currentId, setCurrentId, on
                         </tr>
                     )
                 })}
+                
             </tbody>
             </Table>
+            <Pagination>
+
+                {pageNumbers.map((index)=>{
+                    
+                    return (
+                        currentPage != index  ? 
+                        <Pagination.Item  onClick={()=> paginate(index)} key={index}><a >{index}</a></Pagination.Item>
+                         : <Pagination.Item active onClick={()=> paginate(index)} key={index}><a >{index}</a></Pagination.Item>
+                    
+                    )
+                })}
+    
+            </Pagination>
         </div>
     )
 }
