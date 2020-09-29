@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Formik, Form as FormikForm, Field, ErrorMessage } from 'formik';
+import { Formik, Form as FormikForm, Field} from 'formik';
 import { Container } from  './styled';
 import Button from 'react-bootstrap/Button'
 import * as yup from 'yup'
@@ -38,8 +38,6 @@ function ContactForm (props) {
        })
     }
 
-   
-    
     const validations = yup.object().shape({
         name:yup.string().min(3).required(),
         age:yup.number().required(),
