@@ -39,7 +39,6 @@ function Contact({contactObjects, setContactObjects, currentId, setCurrentId, on
     }
     
     const paginate = (pageNumbers) => {setCurrentPage(pageNumbers)}
-   console.log(currentPosts)
     return (
         <div className="mr-1">
             <Table striped bordered hover size="sm">
