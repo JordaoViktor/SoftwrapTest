@@ -36,7 +36,18 @@ function Home() {
         )
       }
     }
-  
+    const onDelete = key => {
+      if (window.confirm('Você tem certeza que quer deletar ?')){
+          firebaseDb.child(`contacts/${key}`).remove(err => {
+                  if(err){
+                    console.log(err)
+                  } else {
+                    setCurrentId('')
+                  }               
+                }
+          )
+      }
+  }
 
 const {contactObjects, currentId, setContactObjects, setCurrentId } = useContext(FirebaseContext)
 
@@ -56,7 +67,7 @@ const {contactObjects, currentId, setContactObjects, setCurrentId } = useContext
           <ContactForm {...({addOrEdit, currentId, contactObjects})}/>
         </Container>
         <Container>
-          <Contact  {...({currentId, contactObjects, setContactObjects, setCurrentId})}/>
+          <Contact  {...({currentId, contactObjects, setContactObjects, setCurrentId, onDelete})}/>
         </Container>
       </SplitScreen>
     </>

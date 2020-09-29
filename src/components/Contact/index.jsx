@@ -5,16 +5,20 @@ import firebaseDb from '../../firebase';
 import { BsPencil, BsTrash } from 'react-icons/bs';
 
 
-function Contact({contactObjects, setContactObjects, currentId, setCurrentId}) {
+function Contact({contactObjects, setContactObjects, currentId, setCurrentId, onDelete}) {
     useEffect(()=>{
         firebaseDb.child('contacts').on('value', snapshot => {
-            if (snapshot.val() != null)
-            setContactObjects({
-                ...snapshot.val()
-            })
+            if (snapshot.val() != null){
+                setContactObjects({
+                    ...snapshot.val()
+                })
+            } else{ 
+                setContactObjects({})
+            }
         })
     },[])
 
+   
     return (
         <div className="mr-1">
             <Table striped bordered hover size="sm">
@@ -40,7 +44,7 @@ function Contact({contactObjects, setContactObjects, currentId, setCurrentId}) {
                             <td>{contactObjects[id].city}</td>
                             <td>{contactObjects[id].state}</td>
                             <td>
-                                <a className="btn text-danger" >
+                                <a className="btn text-danger" onClick={() =>onDelete(id)} >
                                     <BsTrash/>
                                 </a>
                                 <a className="btn text-primary" onClick={()=> {setCurrentId(id)}}>
